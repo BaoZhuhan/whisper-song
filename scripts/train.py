@@ -30,7 +30,8 @@ def main():
         lc=LoraConfig(r=cfg['lora_rank'],lora_alpha=cfg['lora_alpha'],lora_dropout=cfg['lora_dropout'],target_modules=cfg['target_modules'],bias='none')
         model=get_peft_model(model,lc); model.print_trainable_parameters()
     manifest_root=STORAGE/'dataset/whisper-song/manifests'
-    limit=cfg.get('train_limit'); train=ManifestDataset(manifest_root/'train.jsonl',limit=limit); valid=ManifestDataset(manifest_root/'validation.jsonl',limit=cfg.get('eval_limit'))
+    limit=cfg.get('train_limit'); train=ManifestDataset(manifest_root/'train.jsonl',limit=limit)
+    eval_split=cfg.get('eval_split','validation'); valid=ManifestDataset(manifest_root/f'{eval_split}.jsonl',limit=cfg.get('eval_limit'))
     def metrics(pred):
         pred_ids=pred.predictions; label_ids=pred.label_ids.copy(); label_ids[label_ids==-100]=processor.tokenizer.pad_token_id
         hypotheses=processor.batch_decode(pred_ids,skip_special_tokens=True); references=processor.batch_decode(label_ids,skip_special_tokens=True)
@@ -46,6 +47,13 @@ def main():
       remove_unused_columns=False,report_to=['tensorboard'],seed=cfg.get('seed',42),data_seed=cfg.get('seed',42))
     trainer=Seq2SeqTrainer(model=model,args=args,train_dataset=train,eval_dataset=valid,data_collator=WhisperCollator(processor),processing_class=processor,compute_metrics=metrics)
     resume=latest_checkpoint(a.output_dir) if a.resume_from_checkpoint=='auto' else a.resume_from_checkpoint
-    result=trainer.train(resume_from_checkpoint=resume); trainer.save_model(); processor.save_pretrained(a.output_dir); trainer.save_state()
-    Path(a.output_dir,'run_summary.json').write_text(json.dumps(result.metrics,indent=2),encoding='utf-8')
+    torch.cuda.reset_peak_memory_stats(); result=trainer.train(resume_from_checkpoint=resume); final_eval=trainer.evaluate() if cfg.get('final_evaluate',True) else {}
+    trainer.save_model(); processor.save_pretrained(a.output_dir); trainer.save_state()
+    summary={**result.metrics,**{f'final_{k}':v for k,v in final_eval.items()},'peak_memory_gib':torch.cuda.max_memory_allocated()/1024**3}
+    Path(a.output_dir,'run_summary.json').write_text(json.dumps(summary,indent=2),encoding='utf-8')
+    gate_name=cfg.get('gate_name'); max_cer=cfg.get('max_final_cer')
+    finite=torch.isfinite(torch.tensor(float(summary.get('train_loss',float('nan'))))).item()
+    cer_ok=max_cer is None or summary.get('final_eval_normalized_cer',float('inf')) <= float(max_cer)
+    if gate_name and finite and cer_ok and summary['peak_memory_gib'] < float(cfg.get('max_peak_memory_gib',44)):
+        gate=STORAGE/'model/whisper-song/gates'/gate_name; gate.write_text(json.dumps(summary,indent=2),encoding='utf-8')
 if __name__=='__main__': main()

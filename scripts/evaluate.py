@@ -29,8 +29,9 @@ def evaluate_model(model_name, splits, output_root, batch_size=4, max_samples=No
         predictions=[]; start=time.time(); torch.cuda.reset_peak_memory_stats()
         for pos in tqdm(range(0,len(rows),batch_size),desc=f'{model_name}:{split}'):
             chunk=rows[pos:pos+batch_size]; audio=[load_audio(r['audio_path']) for r in chunk]
-            inputs=processor(audio,sampling_rate=16000,return_tensors='pt',padding=True).input_features.to('cuda',dtype=torch.bfloat16)
-            with torch.inference_mode(): ids=model.generate(inputs,max_new_tokens=448)
+            encoded=processor(audio,sampling_rate=16000,return_tensors='pt',padding=True,return_attention_mask=True)
+            inputs=encoded.input_features.to('cuda',dtype=torch.bfloat16); mask=encoded.attention_mask.to('cuda')
+            with torch.inference_mode(): ids=model.generate(inputs,attention_mask=mask,max_new_tokens=440)
             texts=processor.batch_decode(ids,skip_special_tokens=True)
             for row,hyp in zip(chunk,texts):
                 raw=error_counts(row['text_raw'],hyp); norm=normalized_error_counts(row['text_normalized'],hyp)
