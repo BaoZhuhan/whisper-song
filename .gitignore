@@ -1,0 +1,15 @@
+.venv/
+.cache/
+__pycache__/
+*.py[cod]
+third_party/M4Singer/
+data/downloads/*
+data/raw/*
+data/processed/*
+outputs/*
+!data/downloads/.gitkeep
+!data/raw/m4singer/.gitkeep
+!data/raw/opencpop/.gitkeep
+!data/raw/mir_mlpop/.gitkeep
+!data/processed/.gitkeep
+!outputs/logs/.gitkeep

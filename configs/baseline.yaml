@@ -1,0 +1,6 @@
+models: [openai/whisper-medium, openai/whisper-large-v3]
+splits: [validation, test]
+language: zh
+task: transcribe
+seed: 42
+batch_size: 4
