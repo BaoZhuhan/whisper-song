@@ -24,6 +24,7 @@ class WhisperCollator:
             features.append({"input_features": values})
             label_features.append({"input_ids": self.processor.tokenizer(row["text_normalized"]).input_ids})
         batch = self.processor.feature_extractor.pad(features, return_tensors="pt")
+        batch["input_features"] = batch["input_features"].to(torch.bfloat16)
         labels = self.processor.tokenizer.pad(label_features, return_tensors="pt")
         ids = labels["input_ids"].masked_fill(labels["attention_mask"].ne(1), -100)
         if (ids[:, 0] == self.processor.tokenizer.bos_token_id).all().item(): ids = ids[:, 1:]

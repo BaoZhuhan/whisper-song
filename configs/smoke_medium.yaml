@@ -19,4 +19,5 @@ logging_steps: 5
 predict_with_generate: true
 generation_max_length: 128
 gate_name: medium_smoke.PASS
+max_final_cer: 0.35
 max_peak_memory_gib: 44
