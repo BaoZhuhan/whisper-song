@@ -18,14 +18,15 @@ def load_audio(path):
     x,sr=sf.read(path,dtype='float32',always_2d=False)
     if getattr(x,'ndim',1)>1: x=x.mean(axis=1)
     return librosa.resample(x,orig_sr=sr,target_sr=16000) if sr!=16000 else x
-def evaluate_model(model_name, splits, output_root, batch_size=4, max_samples=None):
-    local=ROOT/'model/whisper-song/base'/model_name.replace('/','--')
+def evaluate_model(model_name, splits, output_root, batch_size=4, max_samples=None, model_path=None, model_label=None):
+    local=Path(model_path) if model_path else ROOT/'model/whisper-song/base'/model_name.replace('/','--')
     processor=AutoProcessor.from_pretrained(local,local_files_only=True)
     model=AutoModelForSpeechSeq2Seq.from_pretrained(local,local_files_only=True,torch_dtype=torch.bfloat16,attn_implementation='sdpa').cuda().eval()
     model.generation_config.language='zh'; model.generation_config.task='transcribe'
     for split in splits:
         rows=read_jsonl(ROOT/'dataset/whisper-song/manifests'/f'{split}.jsonl')[:max_samples]
-        target=Path(output_root)/model_name.split('/')[-1]/split; target.mkdir(parents=True,exist_ok=True)
+        label=model_label or model_name.split('/')[-1]
+        target=Path(output_root)/label/split; target.mkdir(parents=True,exist_ok=True)
         predictions=[]; start=time.time(); torch.cuda.reset_peak_memory_stats()
         for pos in tqdm(range(0,len(rows),batch_size),desc=f'{model_name}:{split}'):
             chunk=rows[pos:pos+batch_size]; audio=[load_audio(r['audio_path']) for r in chunk]
@@ -38,7 +39,7 @@ def evaluate_model(model_name, splits, output_root, batch_size=4, max_samples=No
                 predictions.append({"id":row['id'],"speaker_id":row['speaker_id'],"song_id":row['song_id'],"duration":row['duration'],"reference":row['text_raw'],"hypothesis":hyp,
                   "raw_cer":raw.cer,"normalized_cer":norm.cer,"substitutions":norm.substitutions,"insertions":norm.insertions,"deletions":norm.deletions,"reference_units":norm.reference_units})
         elapsed=time.time()-start; refs=sum(x['reference_units'] for x in predictions); errors=sum(x['substitutions']+x['insertions']+x['deletions'] for x in predictions)
-        metrics={"model":model_name,"split":split,"samples":len(predictions),"normalized_cer":errors/max(1,refs),"exact_match_rate":sum(x['normalized_cer']==0 for x in predictions)/max(1,len(predictions)),
+        metrics={"model":model_label or model_name,"model_path":str(local),"split":split,"samples":len(predictions),"normalized_cer":errors/max(1,refs),"exact_match_rate":sum(x['normalized_cer']==0 for x in predictions)/max(1,len(predictions)),
           "elapsed_seconds":elapsed,"audio_hours":sum(x['duration'] for x in predictions)/3600,"realtime_factor":elapsed/max(1,sum(x['duration'] for x in predictions)),"peak_memory_gib":torch.cuda.max_memory_allocated()/1024**3}
         with (target/'predictions.jsonl').open('w',encoding='utf-8') as f:
             for row in predictions: f.write(json.dumps(row,ensure_ascii=False)+'\n')
@@ -48,7 +49,8 @@ def evaluate_model(model_name, splits, output_root, batch_size=4, max_samples=No
         print(json.dumps(metrics,ensure_ascii=False),flush=True)
     del model; torch.cuda.empty_cache()
 def main():
-    p=argparse.ArgumentParser(); p.add_argument('--config',required=True); p.add_argument('--output-root'); p.add_argument('--max-samples',type=int)
+    p=argparse.ArgumentParser(); p.add_argument('--config',required=True); p.add_argument('--output-root'); p.add_argument('--max-samples',type=int); p.add_argument('--model-path'); p.add_argument('--model-label')
     a=p.parse_args(); cfg=yaml.safe_load(Path(a.config).read_text()); out=a.output_root or str(ROOT/'model/whisper-song/baseline')
-    for model in cfg['models']: evaluate_model(model,cfg['splits'],out,int(cfg.get('batch_size',4)),a.max_samples)
+    models=cfg['models'] if not a.model_path else [a.model_label or 'custom-model']
+    for model in models: evaluate_model(model,cfg['splits'],out,int(cfg.get('batch_size',4)),a.max_samples,a.model_path,a.model_label)
 if __name__=='__main__': main()

@@ -1,0 +1,6 @@
+models: [medium-finetuned]
+splits: [test]
+language: zh
+task: transcribe
+seed: 42
+batch_size: 4
