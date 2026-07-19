@@ -1,6 +1,8 @@
 .venv/
 .cache/
 __pycache__/
+.ipynb_checkpoints/
+paper/**/*.tiff
 *.py[cod]
 third_party/M4Singer/
 data/downloads/*

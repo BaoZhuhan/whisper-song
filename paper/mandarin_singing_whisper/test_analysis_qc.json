@@ -1,0 +1,531 @@
+{
+  "paired_samples": 2072,
+  "songs": 40,
+  "excluded_samples": 2,
+  "exclusions": [
+    {
+      "sample_id": "m4singer_Tenor-4_菩萨蛮_0003",
+      "speaker_id": "Tenor-4",
+      "song_id": "菩萨蛮",
+      "reason": "Fine-tuned output repeated the character 一 until the generation ceiling; 435 insertions for a 4-character reference."
+    },
+    {
+      "sample_id": "m4singer_Tenor-1_修炼爱情_0029",
+      "speaker_id": "Tenor-1",
+      "song_id": "修炼爱情",
+      "reason": "Fine-tuned output repeated the character 啊 until the generation ceiling; 434 insertions for a 6-character reference."
+    }
+  ],
+  "baseline": {
+    "samples": 2072,
+    "reference_units": 18874,
+    "micro_cer": 0.16223376072904525,
+    "substitution_rate": 0.14686870827593515,
+    "insertion_rate": 0.0034968740065698845,
+    "deletion_rate": 0.011868178446540215,
+    "exact_match_rate": 0.41795366795366795
+  },
+  "finetuned": {
+    "samples": 2072,
+    "reference_units": 18874,
+    "micro_cer": 0.13425876867648617,
+    "substitution_rate": 0.1225495390484264,
+    "insertion_rate": 0.0033909081275829184,
+    "deletion_rate": 0.008318321500476846,
+    "exact_match_rate": 0.486003861003861
+  },
+  "macro_song_cer_baseline": 0.19319066526331788,
+  "macro_song_cer_finetuned": 0.16063895355708416,
+  "paired_macro_song_cer_improvement": 0.03255171170623372,
+  "paired_song_bootstrap_95_ci": [
+    0.023882071632154403,
+    0.04128291724921544
+  ],
+  "bootstrap_replicates": 10000,
+  "by_speaker": {
+    "baseline": {
+      "Alto-1": {
+        "samples": 89,
+        "reference_units": 1018,
+        "micro_cer": 0.18172888015717092,
+        "substitution_rate": 0.15029469548133595,
+        "insertion_rate": 0.0019646365422396855,
+        "deletion_rate": 0.029469548133595286,
+        "exact_match_rate": 0.2696629213483146
+      },
+      "Alto-2": {
+        "samples": 58,
+        "reference_units": 524,
+        "micro_cer": 0.2729007633587786,
+        "substitution_rate": 0.1851145038167939,
+        "insertion_rate": 0.01717557251908397,
+        "deletion_rate": 0.07061068702290077,
+        "exact_match_rate": 0.3103448275862069
+      },
+      "Alto-3": {
+        "samples": 120,
+        "reference_units": 1087,
+        "micro_cer": 0.17387304507819687,
+        "substitution_rate": 0.14259429622815087,
+        "insertion_rate": 0.0027598896044158236,
+        "deletion_rate": 0.028518859245630176,
+        "exact_match_rate": 0.43333333333333335
+      },
+      "Alto-4": {
+        "samples": 32,
+        "reference_units": 366,
+        "micro_cer": 0.10382513661202186,
+        "substitution_rate": 0.09836065573770492,
+        "insertion_rate": 0.00273224043715847,
+        "deletion_rate": 0.00273224043715847,
+        "exact_match_rate": 0.34375
+      },
+      "Alto-5": {
+        "samples": 155,
+        "reference_units": 1414,
+        "micro_cer": 0.12942008486562942,
+        "substitution_rate": 0.11386138613861387,
+        "insertion_rate": 0.004243281471004243,
+        "deletion_rate": 0.011315417256011316,
+        "exact_match_rate": 0.45806451612903226
+      },
+      "Alto-6": {
+        "samples": 171,
+        "reference_units": 1614,
+        "micro_cer": 0.12763320941759604,
+        "substitution_rate": 0.12329615861214374,
+        "insertion_rate": 0.0006195786864931846,
+        "deletion_rate": 0.0037174721189591076,
+        "exact_match_rate": 0.4619883040935672
+      },
+      "Alto-7": {
+        "samples": 111,
+        "reference_units": 1008,
+        "micro_cer": 0.13095238095238096,
+        "substitution_rate": 0.11706349206349206,
+        "insertion_rate": 0.000992063492063492,
+        "deletion_rate": 0.012896825396825396,
+        "exact_match_rate": 0.40540540540540543
+      },
+      "Bass-1": {
+        "samples": 318,
+        "reference_units": 2376,
+        "micro_cer": 0.14225589225589225,
+        "substitution_rate": 0.13720538720538722,
+        "insertion_rate": 0.0021043771043771043,
+        "deletion_rate": 0.002946127946127946,
+        "exact_match_rate": 0.4937106918238994
+      },
+      "Bass-2": {
+        "samples": 96,
+        "reference_units": 1115,
+        "micro_cer": 0.10224215246636771,
+        "substitution_rate": 0.09058295964125561,
+        "insertion_rate": 0.0,
+        "deletion_rate": 0.011659192825112108,
+        "exact_match_rate": 0.5104166666666666
+      },
+      "Bass-3": {
+        "samples": 67,
+        "reference_units": 895,
+        "micro_cer": 0.17653631284916202,
+        "substitution_rate": 0.16759776536312848,
+        "insertion_rate": 0.004469273743016759,
+        "deletion_rate": 0.004469273743016759,
+        "exact_match_rate": 0.23880597014925373
+      },
+      "Soprano-1": {
+        "samples": 8,
+        "reference_units": 43,
+        "micro_cer": 0.4418604651162791,
+        "substitution_rate": 0.3488372093023256,
+        "insertion_rate": 0.0,
+        "deletion_rate": 0.09302325581395349,
+        "exact_match_rate": 0.375
+      },
+      "Soprano-3": {
+        "samples": 180,
+        "reference_units": 1357,
+        "micro_cer": 0.23949889462048637,
+        "substitution_rate": 0.2159174649963154,
+        "insertion_rate": 0.016212232866617538,
+        "deletion_rate": 0.007369196757553427,
+        "exact_match_rate": 0.40555555555555556
+      },
+      "Tenor-1": {
+        "samples": 69,
+        "reference_units": 773,
+        "micro_cer": 0.09573091849935317,
+        "substitution_rate": 0.07761966364812418,
+        "insertion_rate": 0.0038809831824062097,
+        "deletion_rate": 0.014230271668822769,
+        "exact_match_rate": 0.5942028985507246
+      },
+      "Tenor-2": {
+        "samples": 124,
+        "reference_units": 927,
+        "micro_cer": 0.1413160733549083,
+        "substitution_rate": 0.12837108953613807,
+        "insertion_rate": 0.0010787486515641855,
+        "deletion_rate": 0.011866235167206042,
+        "exact_match_rate": 0.45161290322580644
+      },
+      "Tenor-3": {
+        "samples": 66,
+        "reference_units": 817,
+        "micro_cer": 0.1346389228886169,
+        "substitution_rate": 0.1346389228886169,
+        "insertion_rate": 0.0,
+        "deletion_rate": 0.0,
+        "exact_match_rate": 0.42424242424242425
+      },
+      "Tenor-4": {
+        "samples": 81,
+        "reference_units": 614,
+        "micro_cer": 0.4381107491856677,
+        "substitution_rate": 0.40716612377850164,
+        "insertion_rate": 0.0016286644951140066,
+        "deletion_rate": 0.029315960912052116,
+        "exact_match_rate": 0.13580246913580246
+      },
+      "Tenor-6": {
+        "samples": 35,
+        "reference_units": 243,
+        "micro_cer": 0.2880658436213992,
+        "substitution_rate": 0.27983539094650206,
+        "insertion_rate": 0.00411522633744856,
+        "deletion_rate": 0.00411522633744856,
+        "exact_match_rate": 0.2
+      },
+      "Tenor-7": {
+        "samples": 292,
+        "reference_units": 2683,
+        "micro_cer": 0.14088706671636228,
+        "substitution_rate": 0.13455087588520312,
+        "insertion_rate": 0.0022363026462914647,
+        "deletion_rate": 0.004099888184867686,
+        "exact_match_rate": 0.4280821917808219
+      }
+    },
+    "finetuned": {
+      "Alto-1": {
+        "samples": 89,
+        "reference_units": 1018,
+        "micro_cer": 0.14734774066797643,
+        "substitution_rate": 0.11394891944990176,
+        "insertion_rate": 0.003929273084479371,
+        "deletion_rate": 0.029469548133595286,
+        "exact_match_rate": 0.3707865168539326
+      },
+      "Alto-2": {
+        "samples": 58,
+        "reference_units": 524,
+        "micro_cer": 0.22519083969465647,
+        "substitution_rate": 0.16603053435114504,
+        "insertion_rate": 0.02862595419847328,
+        "deletion_rate": 0.030534351145038167,
+        "exact_match_rate": 0.3793103448275862
+      },
+      "Alto-3": {
+        "samples": 120,
+        "reference_units": 1087,
+        "micro_cer": 0.14443422263109476,
+        "substitution_rate": 0.11867525298988041,
+        "insertion_rate": 0.0018399264029438822,
+        "deletion_rate": 0.02391904323827047,
+        "exact_match_rate": 0.5
+      },
+      "Alto-4": {
+        "samples": 32,
+        "reference_units": 366,
+        "micro_cer": 0.11475409836065574,
+        "substitution_rate": 0.1092896174863388,
+        "insertion_rate": 0.00273224043715847,
+        "deletion_rate": 0.00273224043715847,
+        "exact_match_rate": 0.375
+      },
+      "Alto-5": {
+        "samples": 155,
+        "reference_units": 1414,
+        "micro_cer": 0.12942008486562942,
+        "substitution_rate": 0.11951909476661952,
+        "insertion_rate": 0.004243281471004243,
+        "deletion_rate": 0.005657708628005658,
+        "exact_match_rate": 0.41935483870967744
+      },
+      "Alto-6": {
+        "samples": 171,
+        "reference_units": 1614,
+        "micro_cer": 0.10656753407682776,
+        "substitution_rate": 0.10223048327137546,
+        "insertion_rate": 0.0018587360594795538,
+        "deletion_rate": 0.0024783147459727386,
+        "exact_match_rate": 0.5555555555555556
+      },
+      "Alto-7": {
+        "samples": 111,
+        "reference_units": 1008,
+        "micro_cer": 0.09623015873015874,
+        "substitution_rate": 0.08531746031746032,
+        "insertion_rate": 0.000992063492063492,
+        "deletion_rate": 0.00992063492063492,
+        "exact_match_rate": 0.4864864864864865
+      },
+      "Bass-1": {
+        "samples": 318,
+        "reference_units": 2376,
+        "micro_cer": 0.10858585858585859,
+        "substitution_rate": 0.10479797979797979,
+        "insertion_rate": 0.0021043771043771043,
+        "deletion_rate": 0.0016835016835016834,
+        "exact_match_rate": 0.5943396226415094
+      },
+      "Bass-2": {
+        "samples": 96,
+        "reference_units": 1115,
+        "micro_cer": 0.08251121076233184,
+        "substitution_rate": 0.0726457399103139,
+        "insertion_rate": 0.0008968609865470852,
+        "deletion_rate": 0.008968609865470852,
+        "exact_match_rate": 0.5208333333333334
+      },
+      "Bass-3": {
+        "samples": 67,
+        "reference_units": 895,
+        "micro_cer": 0.11843575418994413,
+        "substitution_rate": 0.11173184357541899,
+        "insertion_rate": 0.0022346368715083797,
+        "deletion_rate": 0.004469273743016759,
+        "exact_match_rate": 0.417910447761194
+      },
+      "Soprano-1": {
+        "samples": 8,
+        "reference_units": 43,
+        "micro_cer": 0.4418604651162791,
+        "substitution_rate": 0.3488372093023256,
+        "insertion_rate": 0.0,
+        "deletion_rate": 0.09302325581395349,
+        "exact_match_rate": 0.5
+      },
+      "Soprano-3": {
+        "samples": 180,
+        "reference_units": 1357,
+        "micro_cer": 0.17170228445099484,
+        "substitution_rate": 0.16359616801768606,
+        "insertion_rate": 0.004421518054532056,
+        "deletion_rate": 0.0036845983787767134,
+        "exact_match_rate": 0.45
+      },
+      "Tenor-1": {
+        "samples": 69,
+        "reference_units": 773,
+        "micro_cer": 0.09314359637774904,
+        "substitution_rate": 0.08667529107373868,
+        "insertion_rate": 0.00129366106080207,
+        "deletion_rate": 0.00517464424320828,
+        "exact_match_rate": 0.6376811594202898
+      },
+      "Tenor-2": {
+        "samples": 124,
+        "reference_units": 927,
+        "micro_cer": 0.13160733549083065,
+        "substitution_rate": 0.11974110032362459,
+        "insertion_rate": 0.0010787486515641855,
+        "deletion_rate": 0.010787486515641856,
+        "exact_match_rate": 0.5241935483870968
+      },
+      "Tenor-3": {
+        "samples": 66,
+        "reference_units": 817,
+        "micro_cer": 0.11260709914320685,
+        "substitution_rate": 0.11260709914320685,
+        "insertion_rate": 0.0,
+        "deletion_rate": 0.0,
+        "exact_match_rate": 0.48484848484848486
+      },
+      "Tenor-4": {
+        "samples": 81,
+        "reference_units": 614,
+        "micro_cer": 0.3973941368078176,
+        "substitution_rate": 0.36482084690553745,
+        "insertion_rate": 0.009771986970684038,
+        "deletion_rate": 0.02280130293159609,
+        "exact_match_rate": 0.1111111111111111
+      },
+      "Tenor-6": {
+        "samples": 35,
+        "reference_units": 243,
+        "micro_cer": 0.3045267489711934,
+        "substitution_rate": 0.2839506172839506,
+        "insertion_rate": 0.01646090534979424,
+        "deletion_rate": 0.00411522633744856,
+        "exact_match_rate": 0.17142857142857143
+      },
+      "Tenor-7": {
+        "samples": 292,
+        "reference_units": 2683,
+        "micro_cer": 0.11293328363771897,
+        "substitution_rate": 0.10846067834513604,
+        "insertion_rate": 0.0022363026462914647,
+        "deletion_rate": 0.0022363026462914647,
+        "exact_match_rate": 0.541095890410959
+      }
+    }
+  },
+  "by_duration": {
+    "baseline": {
+      "3-6s": {
+        "samples": 1343,
+        "reference_units": 10862,
+        "micro_cer": 0.16461056895599338,
+        "substitution_rate": 0.14988031670042348,
+        "insertion_rate": 0.003406370834100534,
+        "deletion_rate": 0.011323881421469343,
+        "exact_match_rate": 0.43484735666418467
+      },
+      "6-9s": {
+        "samples": 485,
+        "reference_units": 6180,
+        "micro_cer": 0.14449838187702266,
+        "substitution_rate": 0.13090614886731392,
+        "insertion_rate": 0.0017799352750809063,
+        "deletion_rate": 0.011812297734627832,
+        "exact_match_rate": 0.3402061855670103
+      },
+      "<=3s": {
+        "samples": 185,
+        "reference_units": 719,
+        "micro_cer": 0.22531293463143254,
+        "substitution_rate": 0.20027816411682892,
+        "insertion_rate": 0.02086230876216968,
+        "deletion_rate": 0.004172461752433936,
+        "exact_match_rate": 0.572972972972973
+      },
+      ">9s": {
+        "samples": 59,
+        "reference_units": 1113,
+        "micro_cer": 0.1967654986522911,
+        "substitution_rate": 0.17160826594788858,
+        "insertion_rate": 0.0026954177897574125,
+        "deletion_rate": 0.022461814914645103,
+        "exact_match_rate": 0.1864406779661017
+      }
+    },
+    "finetuned": {
+      "3-6s": {
+        "samples": 1343,
+        "reference_units": 10862,
+        "micro_cer": 0.13091511692137728,
+        "substitution_rate": 0.11949917142331062,
+        "insertion_rate": 0.0034984349106978456,
+        "deletion_rate": 0.007917510587368809,
+        "exact_match_rate": 0.5070737155621743
+      },
+      "6-9s": {
+        "samples": 485,
+        "reference_units": 6180,
+        "micro_cer": 0.13042071197411004,
+        "substitution_rate": 0.11860841423948221,
+        "insertion_rate": 0.002750809061488673,
+        "deletion_rate": 0.009061488673139158,
+        "exact_match_rate": 0.38556701030927837
+      },
+      "<=3s": {
+        "samples": 185,
+        "reference_units": 719,
+        "micro_cer": 0.16689847009735745,
+        "substitution_rate": 0.15577190542420027,
+        "insertion_rate": 0.008344923504867872,
+        "deletion_rate": 0.0027816411682892906,
+        "exact_match_rate": 0.6702702702702703
+      },
+      ">9s": {
+        "samples": 59,
+        "reference_units": 1113,
+        "micro_cer": 0.16711590296495957,
+        "substitution_rate": 0.1527403414195867,
+        "insertion_rate": 0.0026954177897574125,
+        "deletion_rate": 0.011680143755615454,
+        "exact_match_rate": 0.2542372881355932
+      }
+    }
+  },
+  "by_lyrics_length": {
+    "baseline": {
+      "17-24": {
+        "samples": 142,
+        "reference_units": 2751,
+        "micro_cer": 0.1530352599054889,
+        "substitution_rate": 0.13740458015267176,
+        "insertion_rate": 0.002544529262086514,
+        "deletion_rate": 0.013086150490730643,
+        "exact_match_rate": 0.19014084507042253
+      },
+      "9-16": {
+        "samples": 835,
+        "reference_units": 9515,
+        "micro_cer": 0.14125065685759328,
+        "substitution_rate": 0.1284287966368891,
+        "insertion_rate": 0.0010509721492380452,
+        "deletion_rate": 0.011770888071466106,
+        "exact_match_rate": 0.3520958083832335
+      },
+      "<=8": {
+        "samples": 1075,
+        "reference_units": 6087,
+        "micro_cer": 0.2014128470510925,
+        "substitution_rate": 0.1815344176113028,
+        "insertion_rate": 0.007885657959586003,
+        "deletion_rate": 0.011992771480203713,
+        "exact_match_rate": 0.5051162790697674
+      },
+      ">24": {
+        "samples": 20,
+        "reference_units": 521,
+        "micro_cer": 0.1362763915547025,
+        "substitution_rate": 0.12859884836852206,
+        "insertion_rate": 0.0019193857965451055,
+        "deletion_rate": 0.005758157389635317,
+        "exact_match_rate": 0.1
+      }
+    },
+    "finetuned": {
+      "17-24": {
+        "samples": 142,
+        "reference_units": 2751,
+        "micro_cer": 0.12686295892402763,
+        "substitution_rate": 0.1163213376953835,
+        "insertion_rate": 0.002544529262086514,
+        "deletion_rate": 0.007997091966557615,
+        "exact_match_rate": 0.19718309859154928
+      },
+      "9-16": {
+        "samples": 835,
+        "reference_units": 9515,
+        "micro_cer": 0.11949553336836574,
+        "substitution_rate": 0.10846032580136626,
+        "insertion_rate": 0.0018917498686284813,
+        "deletion_rate": 0.009143457698370994,
+        "exact_match_rate": 0.42634730538922155
+      },
+      "<=8": {
+        "samples": 1075,
+        "reference_units": 6087,
+        "micro_cer": 0.16132741908986364,
+        "substitution_rate": 0.14752751766058814,
+        "insertion_rate": 0.006242812551338919,
+        "deletion_rate": 0.007557088877936586,
+        "exact_match_rate": 0.575813953488372
+      },
+      ">24": {
+        "samples": 20,
+        "reference_units": 521,
+        "micro_cer": 0.12667946257197696,
+        "substitution_rate": 0.12092130518234165,
+        "insertion_rate": 0.0019193857965451055,
+        "deletion_rate": 0.003838771593090211,
+        "exact_match_rate": 0.2
+      }
+    }
+  }
+}

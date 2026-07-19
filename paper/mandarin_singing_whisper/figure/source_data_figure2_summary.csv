@@ -1,0 +1,13 @@
+metric,model,value,unit
+Micro CER,Baseline,16.22337607,percent
+Micro CER,Fine-tuned,13.42587687,percent
+Macro song CER,Baseline,19.31906653,percent
+Macro song CER,Fine-tuned,16.06389536,percent
+Substitution,Baseline,14.68687083,percent
+Substitution,Fine-tuned,12.25495390,percent
+Deletion,Baseline,1.18681784,percent
+Deletion,Fine-tuned,0.83183215,percent
+Insertion,Baseline,0.34968740,percent
+Insertion,Fine-tuned,0.33909081,percent
+Exact match,Baseline,41.79536680,percent
+Exact match,Fine-tuned,48.60038610,percent

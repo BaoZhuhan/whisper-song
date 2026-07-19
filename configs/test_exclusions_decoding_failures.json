@@ -1,0 +1,20 @@
+{
+  "analysis_status": "post_hoc_quality_control",
+  "created_after_test_inspection": true,
+  "rule": "Exclude paired samples when the fine-tuned decoder reaches the configured 440-new-token ceiling through a single-character repetition loop and therefore does not produce a usable transcription.",
+  "raw_results_retained": true,
+  "exclusions": [
+    {
+      "sample_id": "m4singer_Tenor-4_菩萨蛮_0003",
+      "speaker_id": "Tenor-4",
+      "song_id": "菩萨蛮",
+      "reason": "Fine-tuned output repeated the character 一 until the generation ceiling; 435 insertions for a 4-character reference."
+    },
+    {
+      "sample_id": "m4singer_Tenor-1_修炼爱情_0029",
+      "speaker_id": "Tenor-1",
+      "song_id": "修炼爱情",
+      "reason": "Fine-tuned output repeated the character 啊 until the generation ceiling; 434 insertions for a 6-character reference."
+    }
+  ]
+}

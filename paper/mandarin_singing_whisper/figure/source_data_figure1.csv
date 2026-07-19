@@ -1,0 +1,12 @@
+panel,step,epoch,series,value,unit
+a,,,Whisper-medium baseline,24.24701945,percent_CER
+a,2108,4.000,Fine-tuned checkpoint 2108,22.35411002,percent_CER
+b,250,0.4752287,Formal validation CER,31.97029910,percent_CER
+b,500,0.9504574,Formal validation CER,45.15791675,percent_CER
+b,750,1.4239040,Formal validation CER,27.13344489,percent_CER
+b,1000,1.8991327,Formal validation CER,24.74900648,percent_CER
+b,1250,2.3725793,Formal validation CER,22.46391968,percent_CER
+b,1500,2.8478080,Formal validation CER,22.43777452,percent_CER
+b,1750,3.3212546,Formal validation CER,22.45346162,percent_CER
+b,2000,3.7964833,Formal validation CER,22.40117130,percent_CER
+b,2108,4.0000000,Formal validation CER,22.35411002,percent_CER

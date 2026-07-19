@@ -65,15 +65,27 @@ training audio is not redistributed in this repository.
 All CER values use the same configurable Chinese normalization and micro
 character aggregation.
 
-| System | Validation CER |
-|---|---:|
-| Original Whisper medium | 24.247% |
-| This model | 22.354% |
+| Evaluation | Original Whisper-medium | This model |
+|---|---:|---:|
+| Validation micro CER | 24.247% | **22.354%** |
+| Quality-controlled test micro CER (2,072 paired segments) | 16.223% | **13.426%** |
+| Quality-controlled macro song CER (40 songs) | 19.319% | **16.064%** |
+| Quality-controlled exact-match rate | 41.795% | **48.600%** |
 
-This is an absolute improvement of 1.893 percentage points and a relative
-improvement of approximately 7.81%. The independent final test evaluation and
-song-level paired bootstrap analysis were queued when this initial model card
-was published; the card will be updated after those results are finalized.
+The paired macro-song CER improvement was 3.255 percentage points (10,000
+paired song-bootstrap replicates; 95% CI, 2.388–4.128). The test analysis
+excluded two paired samples after inspection because the fine-tuned decoder
+entered a single-character repetition loop and reached the 440-token ceiling.
+This post-hoc quality-control decision is fully documented and the raw results
+are retained. On the complete 2,074-segment test set, CER was 16.268% for the
+baseline and 18.074% for this model; the two failures contributed 869 of the
+fine-tuned model's 933 insertions.
+
+Full methods, figures and the exclusion record are available in the
+[GitHub paper](https://github.com/BaoZhuhan/whisper-song/blob/main/paper/mandarin_singing_whisper/manuscript.md)
+and its [appendix](https://github.com/BaoZhuhan/whisper-song/blob/main/paper/mandarin_singing_whisper/appendix.md).
+The complete paper bundle can be downloaded as a
+[ZIP archive](https://github.com/BaoZhuhan/whisper-song/raw/main/paper/mandarin_singing_whisper.zip).
 
 ## Usage
 
@@ -99,7 +111,7 @@ model.generation_config.language = "zh"
 model.generation_config.task = "transcribe"
 
 with torch.inference_mode():
-    generated = model.generate(features, attention_mask=mask, max_new_tokens=440)
+    generated = model.generate(features, attention_mask=mask, max_new_tokens=128)
 print(processor.batch_decode(generated, skip_special_tokens=True)[0])
 ```
 
@@ -114,10 +126,17 @@ input window. Resample to 16 kHz when necessary.
 - Unseen-singer, external-dataset, and hallucination evaluations are not yet
   complete.
 - The model can insert or repeat lyrics during silence, breaths, or instrumental
-  passages. Do not treat generated text as verified ground truth.
+  passages. Two test samples entered single-character loops under a 440-token
+  ceiling. Use a task-appropriate output bound and do not treat generated text
+  as verified ground truth.
 - Performance is not evidence of broad Mandarin conversational ASR quality.
 
 ## Citation
+
+Project repository and paper:
+
+- <https://github.com/BaoZhuhan/whisper-song>
+- <https://github.com/BaoZhuhan/whisper-song/tree/main/paper/mandarin_singing_whisper>
 
 Please cite both Whisper and M4Singer when using this model. M4Singer:
 
